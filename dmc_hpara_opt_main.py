@@ -59,7 +59,7 @@ def objective(trial, X_train, X_valid, y_train, y_valid):
         'border_count': trial.suggest_int('border_count', 32, 255),
         'loss_function': 'RMSE',
         'task_type': 'GPU',
-        'devices': '0:1'  # 指定使用的GPU设备
+        'devices': '0:1'  
     }
     
     model = CatBoostRegressor(**params)
