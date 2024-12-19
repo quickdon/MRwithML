@@ -51,23 +51,8 @@ def calculate_descriptors(mol):
     descriptors_2d = Descriptors.CalcMolDescriptors(mol)
     descriptors_3d = Descriptors3D.CalcMolDescriptors3D(mol)
     return list(descriptors_2d.values()) + list(descriptors_3d.values())
+    # return list(descriptors_2d.values())
 
-def hash_combine(seed, v):
-    """模拟Boost库中的hash_combine函数"""
-    return seed ^ (hash(v) + 0x9e3779b9 + (seed << 6) + (seed >> 2))
-
-def generate_layered_fingerprint(descriptors, fp_size=2048):
-    """生成描述符的Layered指纹"""
-    hashed_fingerprint = np.zeros(fp_size, dtype=int)
-    
-    for layer, (key, value) in enumerate(descriptors.items()):
-        seed = layer
-        seed = hash_combine(seed, value)
-        
-        index = seed % fp_size
-        hashed_fingerprint[index] = 1
-    
-    return hashed_fingerprint
 
 # 从npz文件中读取数据
 data = np.load('VQM24/original/DFT_uniques.npz', allow_pickle=True)
@@ -122,3 +107,4 @@ Eatom_array = np.array(Eatom_output)
 
 # 保存指纹和Etot到新的npz文件
 np.savez('VQM24/DFT_descriptors_fingerprints.npz', fingerprints=descriptors_array, Etot=Etot_array, Exc=Exc_array, Eee=Eee_array, Cp=Cp_array, Eatom=Eatom_array)
+# np.savez('VQM24/DFT_descriptors_2d_fingerprints.npz', fingerprints=descriptors_array, Etot=Etot_array, Exc=Exc_array, Eee=Eee_array, Cp=Cp_array, Eatom=Eatom_array)
