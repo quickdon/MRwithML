@@ -1,0 +1,1 @@
+{"estimator__criterion": "squared_error", "estimator__max_depth": 43, "estimator__min_samples_leaf": 1, "estimator__min_samples_split": 12, "learning_rate": 0.001, "loss": "exponential", "n_estimators": 688}
